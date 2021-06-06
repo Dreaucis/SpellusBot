@@ -2,7 +2,7 @@
 import os
 import sqlite3 as sl
 from pathlib import Path
-from random import random
+import random
 
 from discord.ext import commands
 
@@ -73,7 +73,7 @@ async def list_game_websites(ctx: commands.Context):
 
 
 @bot.command()
-async def suggest_game_websites(ctx: commands.Context):
+async def suggest_game_website(ctx: commands.Context):
     """
     Lists all urls in database
 
