@@ -2,6 +2,7 @@
 import os
 import sqlite3 as sl
 from pathlib import Path
+from random import random
 
 from discord.ext import commands
 
@@ -69,6 +70,22 @@ async def list_game_websites(ctx: commands.Context):
     urls = list_urls_from_database()
     urls = '\n'.join([url[0] for url in urls])
     await ctx.channel.send(urls)
+
+
+@bot.command()
+async def suggest_game_websites(ctx: commands.Context):
+    """
+    Lists all urls in database
+
+    :param ctx:
+    :return:
+    """
+    urls = list_urls_from_database()
+    urls = [url[0] for url in urls]
+    url = random.choice(urls)
+    msg = 'I, Spellus Biggus Bottus suggest that you visit {URL}!'.format(URL=url)
+    await ctx.channel.send(msg)
+
 
 if __name__ == '__main__':
     bot.run(os.getenv('TOKEN') or get_token_from_file(Path(__file__).parent / '.env'))
