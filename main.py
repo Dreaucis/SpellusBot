@@ -23,10 +23,10 @@ def add_url_to_database(url: str):
             url TEXT
         );
     """)
-    cursor.execute(f"""
+    cursor.execute("""
         INSERT INTO game_website
-        VALUES (NULL, '{url}')
-    """)
+        VALUES (NULL, '{URL}')
+    """.format(URL=url))
     con.commit()
     con.close()
 
@@ -34,7 +34,7 @@ def add_url_to_database(url: str):
 def list_urls_from_database() -> list:
     con = sl.connect('spellus_biggus.db')
     cursor = con.cursor()
-    cursor.execute(f"""
+    cursor.execute("""
         SELECT
             url
         FROM game_website
@@ -55,7 +55,7 @@ async def save_game_website(ctx: commands.Context, url: str):
     :return:
     """
     add_url_to_database(url)
-    await ctx.channel.send(f'Added {url} to database')
+    await ctx.channel.send('Added {URL} to database.'.format(URL=url))
 
 
 @bot.command()
